@@ -42,6 +42,9 @@ class Session:
     def is_round_active(self) -> bool:
         return self._is_vote_active
 
+    def get_voted(self) -> list:
+        return self._votes.queue
+
     def get_result(self) -> list:
         result = []
         for vote in self._votes.queue:

@@ -10,9 +10,10 @@ def handle_join_room_connect():
 
 
 @socketio.on("player-room-connect")
-def handle_player_room_connect():
+def handle_player_room_connect(player: str):
     logger.log("Player room connected.")
-    event = "enable-buttons" if session.is_round_active() else "disable-buttons"
+    event = "enable-buttons" if session.is_round_active() and player not in \
+                                session.get_voted() else "disable-buttons"
     emit(event, broadcast=True)
 
 

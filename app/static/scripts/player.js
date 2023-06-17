@@ -1,11 +1,12 @@
 console.log("Player menu script is active.");
 
 $(document).ready(function () {
-    var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    const player = document.getElementById("player-name-h").innerHTML;
 
     socket.on('connect', function () {
         console.log("Websocket connected.");
-        socket.emit('player-room-connect');
+        socket.emit('player-room-connect', player);
     });
 
     socket.on("disable-buttons", function () {
@@ -21,7 +22,7 @@ $(document).ready(function () {
     document.getElementById("vote-button").addEventListener('click', function() {
         document.getElementById("vote-button").setAttribute("disabled", '');
         document.getElementById("vote-button").setAttribute("value", 'Проголосовано');
-        socket.emit("vote", document.getElementById("player-name-h").innerHTML)
+        socket.emit("vote", player)
     });
 
     socket.on("reload-all", function() {

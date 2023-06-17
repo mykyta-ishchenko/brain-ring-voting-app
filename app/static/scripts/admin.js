@@ -4,6 +4,7 @@ $(document).ready(function () {
     const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
     const audio = new Audio("/static/audio/round_start_short.mp3");
+    audio.loop = false;
 
     socket.on('connect', function () {
         console.log("Websocket connected.");
