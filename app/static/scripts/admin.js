@@ -3,8 +3,10 @@ console.log("Admin nemu script is active.");
 $(document).ready(function () {
     const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
-    const audio = new Audio("/static/audio/round_start_short.mp3");
-    audio.loop = false;
+    const round_start_audio = new Audio("/static/audio/round_start_audio.mp3");
+    const vote_sound = new Audio("/static/audio/vote.mp3");
+    round_start_audio.loop = false;
+    vote_sound.loop = false;
 
     socket.on('connect', function () {
         console.log("Websocket connected.");
@@ -26,15 +28,27 @@ $(document).ready(function () {
         socket.emit("start-round");
         document.getElementById("end-round-button").setAttribute("style", "");
         document.getElementById("start-round-button").setAttribute("style", "display: none;");
-        audio.load();
-        audio.play();
+        round_start_audio.load();
+        round_start_audio.play();
     });
+
+    socket.on("vote-sound-play", function () {
+        vote_sound.load();
+        vote_sound.play();
+    });
+
+    round_start_audio.addEventListener('ended', function () {
+        socket.emit("end-round");
+        document.getElementById("end-round-button").setAttribute("style", "display: none;");
+        document.getElementById("start-round-button").setAttribute("style", "");
+        round_start_audio.pause();
+    })
 
     document.getElementById("end-round-button").addEventListener("click", function () {
         socket.emit("end-round");
         document.getElementById("end-round-button").setAttribute("style", "display: none;");
         document.getElementById("start-round-button").setAttribute("style", "");
-        audio.pause();
+        round_start_audio.pause();
     });
 
     socket.on('update-voted-list', function (data) {

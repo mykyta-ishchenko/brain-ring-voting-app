@@ -58,6 +58,7 @@ def handle_round_end():
 @socketio.on("vote")
 def handle_vote(player: str):
     session.vote(player)
+    emit("vote-sound-play", broadcast=True)
     emit("update-voted-list", {"votes": session.get_result()}, broadcast=True)
 
 
