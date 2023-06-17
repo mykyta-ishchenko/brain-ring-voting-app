@@ -12,16 +12,22 @@ def handle_join_room_connect():
 @socketio.on("player-room-connect")
 def handle_player_room_connect():
     logger.log("Player room connected.")
+    event = "enable-buttons" if session.is_round_active() else "disable-buttons"
+    emit(event, broadcast=True)
 
 
 @socketio.on("admin-room-connect")
 def handle_admin_room_connect():
     logger.log("Admin room connected.")
+    emit("update-players-list", {"players": session.get_players()}, broadcast=True)
+    emit("update-voted-list", {"votes": session.get_result()}, broadcast=True)
 
 
 @socketio.on("show-room-connect")
 def handle_admin_room_connect():
     logger.log("Admin room connected.")
+    emit("update-voted-list", {"votes": session.get_result()}, broadcast=True)
+    emit("update-voting-status", session.is_round_active(), broadcast=True)
 
 
 @socketio.on("player-join")
@@ -37,6 +43,7 @@ def handle_round_start():
     session.start_round()
     emit("enable-buttons", broadcast=True)
     emit("update-voting-status", session.is_round_active(), broadcast=True)
+    emit("update-voted-list", {"votes": session.get_result()}, broadcast=True)
 
 
 @socketio.on("end-round")
@@ -51,3 +58,10 @@ def handle_round_end():
 def handle_vote(player: str):
     session.vote(player)
     emit("update-voted-list", {"votes": session.get_result()}, broadcast=True)
+
+
+@socketio.on("renew-session")
+def handle_renew_session():
+    logger.log("Session is being renewed.")
+    emit("reload-all")
+    session.renew()

@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     socket.on("disable-buttons", function () {
        document.getElementById("vote-button").setAttribute("disabled", '');
-       document.getElementById("vote-button").setAttribute("value", '');
+       document.getElementById("vote-button").setAttribute("value", 'Очікування');
     });
 
     socket.on("enable-buttons", function () {
@@ -20,7 +20,11 @@ $(document).ready(function () {
 
     document.getElementById("vote-button").addEventListener('click', function() {
         document.getElementById("vote-button").setAttribute("disabled", '');
-        document.getElementById("vote-button").setAttribute("value", '');
+        document.getElementById("vote-button").setAttribute("value", 'Проголосовано');
         socket.emit("vote", document.getElementById("player-name-h").innerHTML)
+    });
+
+    socket.on("reload-all", function() {
+       location.reload();
     });
 });

@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         for (var i = 0; i < data.votes.length; i++) {
             var vote_block = document.createElement("p");
-            vote_block.innerHTML = data.votes[i];
+            vote_block.innerHTML = data.votes[i] + " секунд";
             votes_list.appendChild(vote_block);
         }
     });
@@ -22,5 +22,9 @@ $(document).ready(function () {
     socket.on('update-voting-status', function (is_voting) {
         if (is_voting) document.getElementById("voting-status").innerHTML = "Голосуємо";
         else document.getElementById("voting-status").innerHTML = "Чекаємо";
-    })
+    });
+
+    socket.on("reload-all", function() {
+       location.reload();
+    });
 });

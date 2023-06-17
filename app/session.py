@@ -1,9 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from queue import Queue
-from random import randint
-from typing import Optional
-from urllib import request
 
 
 @dataclass
@@ -48,6 +45,12 @@ class Session:
     def get_result(self) -> list:
         result = []
         for vote in self._votes.queue:
-            time_delta = vote.time - self._voting_start_time
-            result.append(f"{vote.player} - {time_delta.seconds} секунд(а)")
+            time_delta: timedelta = vote.time - self._voting_start_time
+            result.append(f"{vote.player} - {round(time_delta.total_seconds(), 2)}")
         return result
+
+    def renew(self):
+        self._players: set[str] = set()
+        self._votes = Queue()
+        self._voting_start_time = datetime.now()
+        self._is_vote_active = False

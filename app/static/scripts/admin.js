@@ -3,6 +3,8 @@ console.log("Admin nemu script is active.");
 $(document).ready(function () {
     const socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
+    const audio = new Audio("/static/audio/round_start_short.mp3");
+
     socket.on('connect', function () {
         console.log("Websocket connected.");
         socket.emit('admin-room-connect');
@@ -23,12 +25,15 @@ $(document).ready(function () {
         socket.emit("start-round");
         document.getElementById("end-round-button").setAttribute("style", "");
         document.getElementById("start-round-button").setAttribute("style", "display: none;");
-    })
+        audio.load();
+        audio.play();
+    });
 
     document.getElementById("end-round-button").addEventListener("click", function () {
         socket.emit("end-round");
         document.getElementById("end-round-button").setAttribute("style", "display: none;");
         document.getElementById("start-round-button").setAttribute("style", "");
+        audio.pause();
     });
 
     socket.on('update-voted-list', function (data) {
@@ -37,8 +42,16 @@ $(document).ready(function () {
 
         for (var i = 0; i < data.votes.length; i++) {
             var vote_block = document.createElement("p");
-            vote_block.innerHTML = data.votes[i];
+            vote_block.innerHTML = data.votes[i] + " секунд";
             votes_list.appendChild(vote_block);
         }
+    });
+
+    document.getElementById("renew-session").addEventListener('click', function () {
+        socket.emit("renew-session")
+    });
+
+    socket.on("reload-all", function () {
+        location.reload();
     });
 });
