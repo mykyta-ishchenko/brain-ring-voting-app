@@ -1,0 +1,117 @@
+html, body {
+    background: rgb(68, 60, 189);
+    background: linear-gradient(90deg, rgba(68, 60, 189, 1) 20%, rgba(109, 74, 168, 1) 72%);
+    padding: 0;
+    margin: 0;
+}
+
+.body {
+    background-color: rgba(255, 0, 0, 0);
+}
+
+html {
+    padding: 20px;
+}
+
+div .hello {
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.hello, .show {
+    text-align: center;
+}
+
+.hello h2 {
+    color: #4964EB;
+    padding: 20px;
+}
+
+.hello label {
+    font-size: 20px;
+    padding: 10px;
+}
+
+.hello input#nickname-input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #4964EB;
+}
+
+.hello input#join-button {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #4964EB;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid white;
+    font-size: 20px;
+}
+
+.room h1 {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+
+.room input {
+    width: 90vw;
+    height: 80vh;
+    margin-left: 2.5vw;
+    border-radius: 20px;
+    border: 3px solid white;
+    font-size: 5vw;
+}
+
+.room {
+    margin: 0 auto;
+    align-items: center;
+}
+
+div .show {
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.show h1, .adminp h1 {
+    color: #4964EB;
+}
+
+#voted {
+    padding: 10px;
+}
+
+div .adminp {
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.adminp input {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #4964EB;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid white;
+    font-size: 20px;
+}
+
+#player-list p, .adminp #voted-list p {
+    font-size: 20px;
+    padding: 0;
+}
+
+.show #voted-list {
+    padding: 5px;
+    font-size: 50px; !important;
+    font-weight: bold;
+}

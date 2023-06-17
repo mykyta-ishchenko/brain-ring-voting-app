@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+    <div class="body">
+        <div class="adminp">
+
+            <h1>Панель керування</h1>
+
+            <h2>Команди:</h2>
+
+            <div id="player-list">
+                {% for player in players %}
+                    <p>{{ player }}</p>
+                {% endfor %}
+            </div>
+
+            <hr>
+
+            {% if is_round_active %}
+                <input id="start-round-button" value="Почати раунд" type="button" style="display: none;">
+                <input id="end-round-button" value="Завершити раунд" type="button">
+            {% else %}
+                <input id="start-round-button" value="Почати раунд" type="button">
+                <input id="end-round-button" value="Завершити раунд" type="button" style="display: none;">
+            {% endif %}
+
+            <div id="voted">
+                <div id="voted-list">
+                </div>
+            </div>
+
+            <script src="{{ url_for('static', filename='admin.js') }}"></script>
+
+        </div>
+    </div>
+
+{% endblock body %}

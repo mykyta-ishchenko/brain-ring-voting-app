@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+    <div class="room">
+        <h1 id="player-name-h">{{ player }}</h1>
+        <input name="" type="button" value="" id="vote-button" disabled>
+
+        <script src="{{ url_for('static', filename='player.js') }}"></script>
+    </div>
+
+{% endblock body %}

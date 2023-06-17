@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+
+    <div class="body">
+        <div class="hello">
+            <h2>Вітаємо на брейн-рингу!</h2>
+            <label for="nickname-input">Введіть назву команди:</label><br>
+            <input name="" type="text" id="nickname-input"><br><br>
+            <input name="" type="button" value="Приєднатись" id="join-button">
+        </div>
+    </div>
+
+    <script type="application/javascript" src="{{ url_for('static', filename='join.js') }}"></script>
+
+{% endblock body %}

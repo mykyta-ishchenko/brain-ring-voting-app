@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+
+    <div class="body">
+        <div class="show">
+
+            <h1>ДОШКА ГОЛОСУВАННЯ</h1>
+            <h2 id="voting-status">{% if not is_round_active %} Чекаємо {% else %} Голосуємо {% endif %}</h2>
+
+            <div id="voted">
+                <div id="voted-list">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='show.js') }}"></script>
+
+{% endblock body %}
